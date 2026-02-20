@@ -14,15 +14,16 @@ MODEL_PATH = "plant_model.h5"
 DRIVE_ID = "1ioGCHoPyl3sdw16n7ODtWoQuq94wPtWw"
 
 if not os.path.exists(MODEL_PATH):
-    print("Downloading model...")
+    print("⬇️ Downloading model from Google Drive...")
     url = f"https://drive.google.com/uc?id={DRIVE_ID}"
     gdown.download(url, MODEL_PATH, quiet=False)
 
+print("📦 Loading model...")
 model = load_model(MODEL_PATH, compile=False)
-print("✅ Model loaded")
+print("✅ Model loaded successfully")
 
 # =============================
-# CLASSES
+# CLASS NAMES
 # =============================
 CLASS_NAMES = [
     "Apple Scab","Apple Black Rot","Apple Cedar Rust","Apple Healthy",
@@ -40,36 +41,55 @@ CLASS_NAMES = [
 
 IMG_SIZE = 380
 
+# =============================
+# ROUTES
+# =============================
 @app.route("/", methods=["GET", "POST"])
 def index():
     prediction = None
     confidence = None
     img_path = None
+    error = None
 
     if request.method == "POST":
-        file = request.files["image"]
+        if "image" not in request.files:
+            error = "No file uploaded"
+        else:
+            file = request.files["image"]
 
-        upload_folder = "static/uploads"
-        os.makedirs(upload_folder, exist_ok=True)
+            if file.filename == "":
+                error = "No file selected"
+            else:
+                upload_folder = "static/uploads"
+                os.makedirs(upload_folder, exist_ok=True)
 
-        img_path = os.path.join(upload_folder, file.filename)
-        file.save(img_path)
+                img_path = os.path.join(upload_folder, file.filename)
+                file.save(img_path)
 
-        img = image.load_img(img_path, target_size=(IMG_SIZE, IMG_SIZE))
-        img_array = image.img_to_array(img) / 255.0
-        img_array = np.expand_dims(img_array, axis=0)
+                try:
+                    img = image.load_img(img_path, target_size=(IMG_SIZE, IMG_SIZE))
+                    img_array = image.img_to_array(img) / 255.0
+                    img_array = np.expand_dims(img_array, axis=0)
 
-        preds = model.predict(img_array)[0]
-        class_index = np.argmax(preds)
-        confidence = round(float(np.max(preds)) * 100, 2)
-        prediction = CLASS_NAMES[class_index]
+                    preds = model.predict(img_array)[0]
+                    class_index = np.argmax(preds)
+                    confidence = round(float(np.max(preds)) * 100, 2)
+                    prediction = CLASS_NAMES[class_index]
+
+                except Exception as e:
+                    error = f"Prediction error: {str(e)}"
 
     return render_template(
         "index.html",
         prediction=prediction,
         confidence=confidence,
-        img_path=img_path
+        img_path=img_path,
+        error=error
     )
 
+# =============================
+# RENDER COMPATIBLE RUN
+# =============================
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
