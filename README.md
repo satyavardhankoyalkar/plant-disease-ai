@@ -1,137 +1,161 @@
-# 🌿 AI Plant Disease Detection
+# AI Plant Disease Detector (V2)
+
 ![Python](https://img.shields.io/badge/Python-3.10-blue)
-![Flask](https://img.shields.io/badge/Flask-WebApp-black)
+![Streamlit](https://img.shields.io/badge/Streamlit-WebApp-red)
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-AI-orange)
 
+Version 2 — Optimized with MobileNet and Streamlit UI.
+
 An AI-powered web application that detects plant diseases from leaf images using deep learning.  
-Built with **Flask + TensorFlow**, this project demonstrates end-to-end machine learning deployment.
+This version uses a lightweight MobileNet model and a clean Streamlit interface for fast, real-time predictions.
 
----
-#Model Download link:https://drive.google.com/file/d/1ioGCHoPyl3sdw16n7ODtWoQuq94wPtWw/view?usp=sharing
----
-<img width="1016" height="574" alt="image" src="https://github.com/user-attachments/assets/3cddcd1c-3393-4b2c-9e25-121c4d805cc3" />
-<img width="889" height="842" alt="image" src="https://github.com/user-attachments/assets/04d22f3b-6691-4ab7-b01d-4f65113b992d" />
+<img width="748" height="786" alt="image" src="https://github.com/user-attachments/assets/7ea7e5c8-b9b1-4582-8f31-6ee1a624607d" />
 
-
-## 🚀 Features
-
-- 🌱 Upload leaf image and detect disease
-- 🤖 Deep learning CNN-based prediction
-- 📊 Confidence score display
-- 🖥️ Clean and simple web interface
-- ⚡ Real-time inference using Flask
+<img width="498" height="833" alt="Screenshot 2026-02-24 141757" src="https://github.com/user-attachments/assets/da3c7d8b-92a0-45de-ae40-158bcf9337ac" />
 
 ---
 
-## 🧠 Tech Stack
+## Features
 
-- **Backend:** Flask (Python)
-- **ML Model:** TensorFlow / Keras CNN
-- **Frontend:** HTML + CSS
-- **Image Processing:** Pillow / NumPy
+- Upload leaf image and detect disease instantly
 
----
 
-## 📸 Demo
 
-> Upload a plant leaf image to analyze plant health.
 
-Example Output:
-
-- Disease: Tomato Target Spot  
-- Confidence: 92.4%
-
-⚠️ Note: This is a prototype model and results may vary.
+- MobileNet-based deep learning model
+- Confidence score with probability breakdown
+- Fast and lightweight inference
+- Supports multiple crops and diseases
 
 ---
 
-## 🏗️ Project Structure
+## Supported Plants
 
-```
-plant-ai/
+### Tomato (10 classes)
+- Bacterial Spot  
+- Early Blight  
+- Late Blight  
+- Leaf Mold  
+- Septoria Leaf Spot  
+- Spider Mites  
+- Target Spot  
+- Yellow Leaf Curl Virus  
+- Mosaic Virus  
+- Healthy  
+
+### Potato (3 classes)
+- Early Blight  
+- Late Blight  
+- Healthy  
+
+### Pepper Bell (2 classes)
+- Bacterial Spot  
+- Healthy  
+
+---
+
+## Tech Stack
+
+- Frontend/UI: Streamlit  
+- ML Model: TensorFlow / Keras (MobileNetV2)  
+- Image Processing: Pillow, NumPy  
+- Language: Python  
+
+---
+
+## Demo
+
+Upload a plant leaf image and get instant disease prediction.
+
+Example output:
+
+Prediction: Tomato Late Blight  
+Confidence: 97.3%
+
+---
+
+## Project Structure
+ai-plant-disease-detector/
 │
-├── app.py                # Flask backend
-├── plant_model.h5        # Trained CNN model
+├── app.py
+├── plant_model.h5
 ├── requirements.txt
-│
-├── templates/
-│   └── index.html        # Frontend UI
-│
-└── static/
-    └── uploads/          # Uploaded images
-```
+└── README.md
+
+---
+
+## Installation and Setup
+
+### 1. Clone the repository
+
 
 ---
 
 ## ⚙️ Installation & Setup
 
-### 1️⃣ Clone the repository
-
+### 1. Clone the repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/ai-plant-disease-detector.git
-cd ai-plant-disease-detector
+git clone https://github.com/satyavardhankoyalkar/ai-plant-disease-detector.git
+cd ai-plant-disease-detector   bash```
 ```
-
-### 2️⃣ Create virtual environment
-
+### 2. Create virtual environment
 ```bash
-python -m venv tfenv
-tfenv\Scripts\activate   # Windows
+python -m venv venv
+venv\Scripts\activate
 ```
-
-### 3️⃣ Install dependencies
-
+### 3. Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
-
-### 4️⃣ Run the app
-
+### 4. Run the app
 ```bash
-python app.py
+streamlit run app.py
 ```
-
 Open in browser:
+http://localhost:8501
+---
+## ⚙️ How It Works
+User uploads a leaf image
 
-```
-http://127.0.0.1:5000
-```
+Image resized to 224×224
+
+MobileNet model predicts disease class
+
+Result and confidence displayed
+---
+## 🚀 Version 2 Improvements
+
+🔄 Migrated from Flask → Streamlit
+
+⚡ Lightweight MobileNet model
+
+📉 Reduced deployment complexity
+
+🎨 Cleaner UI and UX
+
+📊 Class probability visualization
+---
+## 🔮 Future Improvements
+🌍 Multi-language support
+
+📱 Mobile optimization
+
+☁️ HuggingFace deployment
+
+🌿 Disease treatment suggestions
+
+🔥 Grad-CAM visualizations
 
 ---
-
-## 🧪 How It Works
-
-1. User uploads a leaf image
-2. Image is resized and normalized
-3. CNN model predicts disease class
-4. Result + confidence displayed on UI
-
----
-
-## 📌 Future Improvements
-
-- 🌿 Better dataset training
-- 📱 Mobile responsive UI
-- 🔥 Grad-CAM heatmap visualization
-- ☁️ Cloud deployment (Render / Railway)
-- 🌍 Multi-language support
-
----
-
 ## ⚠️ Disclaimer
 
-This project is built for **educational and demonstration purposes**.  
-The model is trained on a limited dataset and may not generalize to all real-world plant species.
-
----
-
+This project is built for educational and portfolio purposes.
+Model performance may vary on real-world images.
+--
 ## 👨‍💻 Author
-
-**Satya**  
-Aspiring Software Developer | AI & Web Enthusiast
-
+Satya 🌿
+AI Builder | Full Stack Learner | Future ML Engineer 🚀
 ---
+## ⭐ Support
+If you found this project useful, consider giving it a ⭐ on GitHub.
 
-## ⭐ If you like this project
-
-Give it a ⭐ on GitHub and share feedback!
