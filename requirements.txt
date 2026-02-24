@@ -1,7 +1,4 @@
-flask==2.3.3
-tensorflow-cpu==2.10.0
+streamlit==1.33.0
+tensorflow==2.10.0
 numpy==1.23.5
 pillow
-
-gunicorn
-gdown
