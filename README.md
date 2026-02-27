@@ -1,4 +1,6 @@
 # 🌿 AI Plant Disease Detector (V3)
+![Release](https://img.shields.io/badge/version-v3-green)
+![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)
 
 An AI-powered web app that detects plant diseases from leaf images using deep learning.
 Built with TensorFlow and deployed on Hugging Face Spaces using Gradio.
